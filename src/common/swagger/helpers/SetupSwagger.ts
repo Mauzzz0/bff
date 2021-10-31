@@ -3,9 +3,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export const SetupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
-    .setTitle('Outside Digital')
-    .setDescription('API тестового задания Outside Digital')
-    .setVersion('0.1')
+    .setTitle('Апи для чата')
+    .setDescription('API тестового бэкенда для чата для фронтенда Маши')
+    .setVersion('v1.0')
     .addBearerAuth()
     .build();
 

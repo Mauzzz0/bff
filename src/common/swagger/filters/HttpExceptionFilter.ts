@@ -1,6 +1,5 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
-import CodesEnum from 'src/common/rules/exceptions/CodesEnum';
 import { ErrorResponse } from '../types/ErrorResponse';
 import { SuccessOrErrorEnum } from '../types/SuccessOrErrorEnum';
 
@@ -12,16 +11,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
 
     // сначала наш код, затем нейм эксепшена если есть, затем UNTRACKED
-    let code = exception['code'] || exception.name || 'UNTRACKED_APP_ERROR';
-    let { message } = exception;
-
-    // Костылёк, непонятно как LocalStrategy кидает свой Unauthorized()
-    switch (exception['status']) {
-      case 401:
-        code = CodesEnum.UNATHORIZED;
-        message = 'You must be authorized';
-        break;
-    }
+    const code = exception['code'] || exception.name || 'UNTRACKED_APP_ERROR';
+    const { message } = exception;
 
     const responseObject: ErrorResponse = {
       status: SuccessOrErrorEnum.Error,
