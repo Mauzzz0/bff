@@ -1,6 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsDate, IsInt, IsString } from 'class-validator';
+import { IsArray, IsDate, IsInt, IsString } from 'class-validator';
 
 export class Message {
   @ApiProperty()
@@ -15,9 +15,9 @@ export class Message {
   @IsString()
   public text: string;
 
-  // @ApiProperty()
-  // @IsString()
-  // public attachments?: string;
+  @ApiProperty()
+  @IsArray()
+  public attachments?: string[];
 
   @ApiProperty()
   @Type(() => Date)
@@ -26,4 +26,4 @@ export class Message {
 }
 
 export class MessageWnoId extends OmitType(Message, ['id'] as const) {}
-export class MessageWonlyText extends OmitType(Message, ['id', 'senderId', 'datetime'] as const) {}
+export class UpdateMessage extends OmitType(Message, ['id', 'senderId', 'datetime'] as const) {}

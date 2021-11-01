@@ -1,14 +1,9 @@
 import { Injectable, NotFoundException, NotImplementedException } from '@nestjs/common';
-import { User } from 'src/layers/gateways/rest/testapi/types/User';
+import { CreateUser, User, UserWnoPict } from 'src/layers/gateways/rest/testapi/types/User';
 
 @Injectable()
 export class UsersService {
-  private static storage: {
-    id: number;
-    email: string;
-    password: string;
-    picture: string;
-  }[] = [
+  private static storage: any[] = [
     {
       id: 1,
       email: 'example@domain.com',
@@ -46,9 +41,17 @@ export class UsersService {
     throw new NotImplementedException();
   }
 
-  public async create(body: User): Promise<any> {
-    body['id'] = UsersService.storage.length + 1;
-    UsersService.storage.push(body as any);
+  public async create(body: CreateUser): Promise<any> {
+    let max = 0;
+    UsersService.storage.map((item) => {
+      if (item.id > max) {
+        max = item.id;
+      }
+    });
+
+    const user: UserWnoPict = { id: max + 1, ...body };
+
+    UsersService.storage.push(user);
 
     return body;
   }
