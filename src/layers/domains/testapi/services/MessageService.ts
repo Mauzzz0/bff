@@ -62,7 +62,7 @@ export class MessageService {
   ];
 
   public async get(): Promise<any> {
-    return MessageService.storage;
+    return { list: MessageService.storage };
   }
 
   public async delete(id: number | string): Promise<any> {
@@ -76,6 +76,11 @@ export class MessageService {
       if (message.id !== id) {
         return message;
       } else {
+        if (body.attachments) {
+          message.text = body.text;
+          message.attachments = body.attachments;
+          return message;
+        }
         return (message.text = body.text);
       }
     });

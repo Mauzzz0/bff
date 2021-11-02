@@ -9,19 +9,8 @@ export const ApiResponse = <TModel extends Type<any>>(
 ) => {
   return applyDecorators(
     BaseApiResponse({
-      status: httpStatus,
       schema: {
-        title: `${PayloadType.name}Response`,
-        oneOf: [
-          {
-            properties: {
-              status: { type: 'string', default: status },
-              payload: {
-                $ref: getSchemaPath(PayloadType),
-              },
-            },
-          },
-        ],
+        $ref: getSchemaPath(PayloadType),
       },
     }),
   );
