@@ -20,7 +20,7 @@ export class UsersService {
     },
     {
       id: 3,
-      login: 'log2',
+      login: 'log3',
       email: 'example3@domain.com',
       password: 'password3',
       picture: 'pict3',
