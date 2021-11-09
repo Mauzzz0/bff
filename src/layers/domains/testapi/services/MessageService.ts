@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Message, MessageWnoId } from 'src/layers/gateways/rest/testapi/types/Message';
+import {
+  CreateMessage,
+  Message,
+  MessageWnoId,
+} from 'src/layers/gateways/rest/testapi/types/Message';
 
 @Injectable()
 export class MessageService {
@@ -98,7 +102,7 @@ export class MessageService {
     return { result: true };
   }
 
-  public async create(body: MessageWnoId): Promise<any> {
+  public async create(body: CreateMessage): Promise<any> {
     // временное плохое решение)
     try {
       let max = 0;
@@ -108,7 +112,7 @@ export class MessageService {
         }
       });
 
-      const msg = { ...body, id: max + 1 };
+      const msg = { ...body, id: max + 1, edited: false };
 
       if (body.text == 'callerror') {
         throw new Error();

@@ -2,11 +2,11 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiExtraModels, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ApiOkResponse } from 'src/common/swagger/decorators/ApiOkResponse';
 import { MessageService } from 'src/layers/domains/testapi/services/MessageService';
-import { Message, MessageList, MessageWnoId, UpdateMessage } from '../types/Message';
+import { CreateMessage, Message, MessageList, MessageWnoId, UpdateMessage } from '../types/Message';
 import { Result } from '../types/Result';
 
 @ApiTags('Message')
-@ApiExtraModels(Message, Result, MessageWnoId, UpdateMessage, MessageList)
+@ApiExtraModels(Message, Result, CreateMessage, UpdateMessage, MessageList)
 @Controller('msg')
 export class MessageController {
   constructor(private messageService: MessageService) {}
@@ -38,7 +38,7 @@ export class MessageController {
   })
   @ApiOkResponse(Message)
   @Post('')
-  public async create(@Body() body: MessageWnoId): Promise<any> {
+  public async create(@Body() body: CreateMessage): Promise<any> {
     return this.messageService.create(body);
   }
 }
