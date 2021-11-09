@@ -31,7 +31,7 @@ export class Message {
 
 export class MessageWnoId extends OmitType(Message, ['id'] as const) {}
 export class UpdateMessage extends OmitType(Message, ['id', 'senderId', 'datetime'] as const) {}
-export class CreateMessage extends OmitType(Message, ['edited' as const]) {}
+export class CreateMessage extends OmitType(Message, ['id', 'edited'] as const) {}
 
 export class MessageList {
   @ApiProperty({ type: [Message] })
