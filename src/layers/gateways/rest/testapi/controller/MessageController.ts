@@ -32,7 +32,10 @@ export class MessageController {
     return this.messageService.update(id, body);
   }
 
-  @ApiOperation({ description: 'Создать сообщение' })
+  @ApiOperation({
+    description:
+      'Создать сообщение<br/>Если в "text" вставить сообщение "callerror", сгенерирует ошибку',
+  })
   @ApiOkResponse(Message)
   @Post('')
   public async create(@Body() body: MessageWnoId): Promise<any> {

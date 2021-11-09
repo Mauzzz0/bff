@@ -1,6 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsArray, IsDate, IsInt, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsBoolean, IsDate, IsInt, IsString, ValidateNested } from 'class-validator';
 
 export class Message {
   @ApiProperty()
@@ -23,6 +23,10 @@ export class Message {
   @Type(() => Date)
   @IsDate()
   public datetime: Date;
+
+  @ApiProperty()
+  @IsBoolean()
+  public edited: boolean;
 }
 
 export class MessageWnoId extends OmitType(Message, ['id'] as const) {}
