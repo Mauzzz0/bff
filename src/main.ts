@@ -10,7 +10,7 @@ async function bootstrap() {
   SetupSwagger(app);
   applyGlobalValidation(app);
 
-  await app.listen(3000);
+  await app.listen(3009);
 
   ShowRoutesAtStart(app);
 }
